@@ -1,6 +1,10 @@
+@extends('layouts')
+
+@section('content')
 <h1>
     About
 </h1>
 
 <p>company name</p>
-<p>123-123-123</p>
+<p>123-123-123</p>    
+@endsection

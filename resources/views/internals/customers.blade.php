@@ -1,7 +1,14 @@
-<ul>
-@foreach ($customers as $customer)
+@extends('layouts')
+
+
+@section('content')
     
-        <li>{{$customer}}</li>
+<ul>
+    @foreach ($customers as $customer)
         
-@endforeach
+            <li>{{$customer}}</li>
+            
+    @endforeach
 </ul>
+
+@endsection
