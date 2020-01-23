@@ -44,7 +44,15 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request()->validate([
+            'name' => 'required|min:3',
+        ]);
+
+        $customers = new Customer();
+        $customers->name = request('name');
+        $customers->save();
+
+        return redirect('customers');
     }
 
     /**
