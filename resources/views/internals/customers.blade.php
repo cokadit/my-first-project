@@ -36,6 +36,15 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label for="company_id">Company</label>
+                <select name="company_id" id="company_id" class="form-control ">
+                    @foreach ($companies as $company)
+                        <option value="{{$company->id}}">{{$company->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <button type="submit" class="btn btn-primary">Add Customer</button>
         </form>
     </div>
@@ -44,7 +53,7 @@
 <hr>
 
 <div class="row">
-    <div class="col-16">
+    <div class="col-6">
         <h3>Active Customer</h3>
         <ul>
             @foreach ($activeCustomers as $activecustomer)
@@ -55,7 +64,7 @@
             @endforeach
         </ul>
     </div>
-    <div class="col-16">
+    <div class="col-6">
         <h3>Inactive Customer</h3>
         <ul>
             @foreach ($inactiveCustomers as $inactivecustomer)
