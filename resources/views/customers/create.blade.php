@@ -1,6 +1,6 @@
 @extends('layouts')
 
-@section('title','Customer List')
+@section('title','Add new Customer')
 
 @section('content')
 
@@ -12,7 +12,7 @@
 
 <div class="col">
     <div class="col-12">
-        <form action="customers" method="POST">
+        <form action="/customers" method="POST">
             @csrf
 
             <label for="name">Name</label>
@@ -49,34 +49,6 @@
         </form>
     </div>
 </div>
-
-<hr>
-
-<div class="row">
-    <div class="col-6">
-        <h3>Active Customer</h3>
-        <ul>
-            @foreach ($activeCustomers as $activecustomer)
-                
-                    <li>{{$activecustomer->name}}
-                    <span class="text-muted">({{$activecustomer->email }})</li></span>
-                    
-            @endforeach
-        </ul>
-    </div>
-    <div class="col-6">
-        <h3>Inactive Customer</h3>
-        <ul>
-            @foreach ($inactiveCustomers as $inactivecustomer)
-                
-                    <li>{{$inactivecustomer->name}}
-                    <span class="text-muted">({{$inactivecustomer->email }})</li></span>
-                    
-            @endforeach
-        </ul>
-    </div>
-</div>
-
 
 
 @endsection

@@ -8,18 +8,6 @@ use Illuminate\Http\Request;
 
 class CustomersController extends Controller
 {
-    public function list()
-    {
-        $activeCustomers = Customer::active()->get();
-        $inactiveCustomers = Customer::inactive()->get();
-        $companies = Company::all();
-        
-
-        return view('internals.customers',compact('activeCustomers','inactiveCustomers','companies'));
-
-    }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +15,9 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::all();
+        
+        return view('customers.index',compact('customers'));
     }
 
     /**
@@ -37,7 +27,8 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        //
+        $companies = Company::all();
+        return view('customers.create',compact('companies'));
     }
 
     /**
@@ -57,7 +48,7 @@ class CustomersController extends Controller
         
         $customers = Customer::create($data);
 
-        return back();
+        return redirect('customers');
     }
 
     /**
