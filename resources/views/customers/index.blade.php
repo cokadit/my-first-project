@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-12">
         <h1>Customers</h1>
-        <p><a href="customers/create">Add new customers</a></p>
+        <p><a href="{{route('customers.create')}}">Add new customers</a></p>
     </div>
 </div>
 
@@ -17,7 +17,7 @@
             {{ $customer->id }}
         </div>
         <div class="col-4">
-            <a href="/customers/{{$customer->id}}">{{$customer->name}}</a>
+            <a href="{{route('customers.show',['customer'=>$customer])}}">{{$customer->name}}</a>
         </div>
         <div class="col-4">{{$customer->company->name}}</div>
         <div class="col-2">{{$customer->active}}</div>
