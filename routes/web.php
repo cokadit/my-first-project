@@ -3,7 +3,6 @@
 /* */
 
 Route::view('/','home');
-Route::view('/contact','contact')->name('contact');
 Route::view('/about','about')->name('about');
 
 // Route::get('/customers','CustomersController@index');

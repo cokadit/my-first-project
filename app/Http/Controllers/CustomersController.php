@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Company;
+use App\Events\NewCustomerHasRegisteredEvent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 
 class CustomersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         $customers = Customer::all();
@@ -20,11 +19,7 @@ class CustomersController extends Controller
         return view('customers.index',compact('customers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         $companies = Company::all();
@@ -32,49 +27,30 @@ class CustomersController extends Controller
         return view('customers.create',compact('companies','customer'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {   
-        $customers = Customer::create($this->validateRequest());
+        $customer = Customer::create($this->validateRequest());
 
+        event(new NewCustomerHasRegisteredEvent($customer));
+            
         return redirect('customers');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function show(Customer $customer)
     {
         return view('customers.show',compact('customer'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Customer $customer)
     {
         $companies = Company::all();
         return view('customers.edit',compact('customer','companies'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Customer $customer)
     {
 
@@ -83,12 +59,7 @@ class CustomersController extends Controller
         return redirect('customers/'.$customer->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Customer $customer)
     {
         $customer->delete();
