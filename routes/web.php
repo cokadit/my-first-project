@@ -5,6 +5,9 @@
 Route::view('/','home');
 Route::view('/about','about')->name('about');
 
+Route::get('contact','ContactFormController@create')->name('contact');
+Route::post('contact','ContactFormController@store')->name('contact.store');
+
 // Route::get('/customers','CustomersController@index');
 // Route::get('/customers/create','CustomersController@create');
 // Route::post('/customers','CustomersController@store');
