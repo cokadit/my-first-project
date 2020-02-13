@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Customer;
 use App\Company;
+use App\Customer;
 use App\Events\NewCustomerHasRegisteredEvent;
+use App\Mail\WelcomeNewUserMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 

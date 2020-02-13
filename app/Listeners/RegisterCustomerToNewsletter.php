@@ -2,14 +2,12 @@
 
 namespace App\Listeners;
 
-use App\Providers\NewCustomerHasRegisteredEvent;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Events\NewCustomerHasRegisteredEvent;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class RegisterCustomerToNewsletter
 {
-    
-
     /**
      * Handle the event.
      *
@@ -18,6 +16,6 @@ class RegisterCustomerToNewsletter
      */
     public function handle(NewCustomerHasRegisteredEvent $event)
     {
-        dump('Register to news letter');
+        dump('Registered to newsletter');
     }
 }
