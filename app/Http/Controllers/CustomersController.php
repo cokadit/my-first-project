@@ -8,6 +8,7 @@ use App\Events\NewCustomerHasRegisteredEvent;
 use App\Mail\WelcomeNewUserMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Intervention\Image\Facades\Image;
 
 
 class CustomersController extends Controller
@@ -33,6 +34,8 @@ class CustomersController extends Controller
     {   
         $customer = Customer::create($this->validateRequest());
 
+        $this->storeImage($customer);
+
         event(new NewCustomerHasRegisteredEvent($customer));
             
         return redirect('customers');
@@ -57,6 +60,8 @@ class CustomersController extends Controller
 
         $customer->update($this->validateRequest());
 
+        $this->storeImage($customer);
+
         return redirect('customers/'.$customer->id);
     }
 
@@ -74,6 +79,19 @@ class CustomersController extends Controller
             'email' => 'required|email',
             'active' => 'required',
             'company_id' => 'required',
+            'image'=>'sometimes|file|image|max:5000',
         ]);
+         
+    }
+
+    public function storeImage($customer){
+        if(request()->has('image')){
+            $customer->update([
+                'image'=>request()->image->store('uploads','public'),
+            ]);
+ 
+            $image = Image::make(public_path('storage/' . $customer->image))->fit(300,300);
+            $image->save();
+        }
     }
 }
